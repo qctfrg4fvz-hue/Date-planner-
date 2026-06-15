@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Date Planner</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #fff0f5; text-align: center; margin: 0; padding: 50px; }
+    h1 { color: #ff3366; }
+    button { background: #ff3366; color: white; border: none; padding: 10px 20px; margin: 10px; cursor: pointer; border-radius: 6px; }
+    #noBtn { position: absolute; }
+    .hidden { display: none; }
+    .emoji { font-size: 2em; margin: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Will you go on a date with me? ❤️</h1>
+  <button onclick="yesClicked()">Yes</button>
+  <button id="noBtn" onmouseover="moveNo()">No</button>
+
+  <div id="step2" class="hidden">
+    <h2>Pick Location 📍</h2>
+    <input type="text" id="location" placeholder="e.g., Rooftop Café">
+    <button onclick="nextMood()">Next</button>
+  </div>
+
+  <div id="step3" class="hidden">
+    <h2>Choose Mood 🎭</h2>
+    <select id="mood">
+      <option>Romantic</option>
+      <option>Adventurous</option>
+      <option>Casual</option>
+      <option>Cozy-at-home</option>
+    </select>
+    <button onclick="nextEmoji()">Next</button>
+  </div>
+
+  <div id="step4" class="hidden">
+    <h2>Sending kisses & love 💋💕</h2>
+    <div class="emoji">😘😍💖💞💋</div>
+    <button onclick="nextDate()">Next</button>
+  </div>
+
+  <div id="step5" class="hidden">
+    <h2>Select Date 📅</h2>
+    <input type="date" id="date">
+    <button onclick="finalStep()">Finish</button>
+  </div>
+
+  <div id="result" class="hidden"></div>
+
+  <script>
+    function yesClicked() {
+      document.getElementById('step2').classList.remove('hidden');
+    }
+    function moveNo() {
+      const noBtn = document.getElementById('noBtn');
+      noBtn.style.left = Math.random() * window.innerWidth + 'px';
+      noBtn.style.top = Math.random() * window.innerHeight + 'px';
+    }
+    function nextMood() {
+      document.getElementById('step2').classList.add('hidden');
+      document.getElementById('step3').classList.remove('hidden');
+    }
+    function nextEmoji() {
+      document.getElementById('step3').classList.add('hidden');
+      document.getElementById('step4').classList.remove('hidden');
+    }
+    function nextDate() {
+      document.getElementById('step4').classList.add('hidden');
+      document.getElementById('step5').classList.remove('hidden');
+    }
+    function finalStep() {
+      const location = document.getElementById('location').value;
+      const mood = document.getElementById('mood').value;
+      const date = document.getElementById('date').value;
+      document.getElementById('step5').classList.add('hidden');
+      document.getElementById('result').classList.remove('hidden');
+      document.getElementById('result').innerHTML =
+        `<h2>💖 Yay! Your ${mood} date at ${location} on ${date} is set! 💋💕</h2>`;
+    }
+  </script>
+</body>
+</html>
